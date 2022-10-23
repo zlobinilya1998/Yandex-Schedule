@@ -64,7 +64,7 @@ app.post('/', async (req, res) => {
     })
 
     if (session.new) {
-        response.response.text = 'Я умею находить записи на сегодня и на завтра, на какой день вам показать?';
+        response.response.text = 'Я умею находить записи на сегодня и на завтра \n на какой день вам показать?';
         return res.send(response);
     }
 
