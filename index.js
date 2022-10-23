@@ -14,7 +14,28 @@ app.use(
     })
 )
 
+const cookies = "PHPSESSID=aid0n4viav3ke9dd377946kpb0;_ym_uid=1666536337347538161;_ym_d=1666536337;_ym_isad=2"
+
 app.post('/', async (req, res) => {
+    let responseText = ''
+    const { data } = await axios.post('https://profsalon.org/CRM/msc_persona_malaya_nikitskaya/desktop/loadScheduleEvents', {
+        day: "22.10.2022",
+    }, {
+        headers: {
+            Cookie: cookies,
+        }
+    })
+
+    let events = data.events.filter(event => event.id).map(event => ({
+        ...event,
+        start: new Date(event.start)
+    })).sort((a,b) => a.start - b.start)
+
+
+    events.forEach(event => {
+        responseText += event.name + ' '
+    })
+
     const {version, session} = req.body
 
     const response = {
@@ -24,11 +45,10 @@ app.post('/', async (req, res) => {
             end_session: false,
         }
     }
-    console.log(req.body)
 
     if (session.new) response.response.text = 'За какой день показать запись?'
     else {
-        response.response.text = 'Запись на завтра - это';
+        response.response.text = 'Запись на завтра - это' + responseText;
         response.response.end_session = true;
     }
 
