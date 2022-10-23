@@ -25,6 +25,11 @@ app.post('/', async (req, res) => {
         }
     }
     console.log(req.body)
+
+    if (session.new){
+        response.response.text = 'Привет, как ты?'
+    }
+
     res.send(response)
 })
 
