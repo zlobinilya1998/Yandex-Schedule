@@ -8,7 +8,7 @@ config()
 const app = express()
 
 
-const getEvents = async () => {
+const getEvents = async (forceToday = false) => {
     const today = new Date().toLocaleString('ru-Ru').split(',')[0];
     let tommorow = new Date()
     tommorow.setDate(tommorow.getDate() + 1);
@@ -17,7 +17,7 @@ const getEvents = async () => {
     const api_url = 'https://profsalon.org/CRM/msc_persona_malaya_nikitskaya/desktop/loadScheduleEvents';
     const cookies = "PHPSESSID=aid0n4viav3ke9dd377946kpb0;_ym_uid=1666536337347538161;_ym_d=1666536337;_ym_isad=2"
     const { data } = await axios.post(api_url, {
-        day: '22.10.2022',
+        day: forceToday ? today : tommorow,
     }, {
         headers: {
             Cookie: cookies,
@@ -34,7 +34,7 @@ app.use(express.urlencoded({
 
 app.post('/', async (req, res) => {
     const {version, session, request} = req.body
-    const userCommand = request?.command?.toLowerCase();
+    const userCommand = request.command.toLowerCase();
     const response = {
         version,
         session,
@@ -45,11 +45,10 @@ app.post('/', async (req, res) => {
 
     let responseText = ''
     let data = [];
+    const forceToday = userCommand.includes('сегодня');
     try {
-        data = await getEvents();
+        data = await getEvents(forceToday);
     } catch (e) {
-        console.log(data)
-        console.log(e)
         response.response.text = 'Произошла ошибка при запросе данных из салона'
         response.response.end_session = true;
         return res.send(response);
@@ -73,7 +72,7 @@ app.post('/', async (req, res) => {
         response.response.text = 'На указанный период никто не записался, можете отдохнуть';
         response.response.end_session = true;
     } else {
-        response.response.text = 'Запись на завтра - это ' + responseText;
+        response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'} - это ` + responseText;
         response.response.end_session = true;
     }
 
