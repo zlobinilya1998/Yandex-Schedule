@@ -40,7 +40,6 @@ app.post('/', async (req, res) => {
         session,
         response: {
             end_session: false,
-            tts: "<speaker audio=\"alice-sounds-game-win-1.opus\"> У вас получилось!"
         }
     }
 
@@ -71,6 +70,7 @@ app.post('/', async (req, res) => {
 
     if (!events.length) {
         response.response.text = `На ${forceToday ? 'сегодня' : 'завтра'} никто не записался, можете отдохнуть`;
+        response.response.tts =  "<speaker audio=\"alice-sounds-game-win-1.opus\">"
         response.response.end_session = true;
     } else {
         response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'} - это ` + responseText;
