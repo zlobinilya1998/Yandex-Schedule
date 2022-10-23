@@ -50,6 +50,7 @@ app.post('/', async (req, res) => {
     try {
         data = await getEvents();
     } catch (e) {
+        console.log(data)
         console.log(e)
         response.response.text = 'Произошла ошибка при запросе данных из салона'
         response.response.end_session = true;
@@ -82,7 +83,17 @@ app.post('/', async (req, res) => {
 
     res.send(response)
 })
+app.post('/test', async (req, res) => {
+    let data = [];
+    try {
+        data = await getEvents();
+    } catch (e) {
+        console.log(e)
+        res.send(e)
+    }
 
+    res.send(data)
+})
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
