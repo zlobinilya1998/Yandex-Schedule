@@ -40,6 +40,7 @@ app.post('/', async (req, res) => {
         session,
         response: {
             end_session: false,
+            tts: "<speaker audio=\"alice-sounds-game-win-1.opus\"> У вас получилось!"
         }
     }
 
