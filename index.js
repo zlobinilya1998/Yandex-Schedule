@@ -26,9 +26,8 @@ app.post('/', async (req, res) => {
     }
     console.log(req.body)
 
-    if (session.new){
-        response.response.text = 'Привет, как ты?'
-    }
+    if (session.new) response.response.text = 'За какой день показать запись?'
+    else response.response.text = 'Запись на завтра - это'
 
     res.send(response)
 })
