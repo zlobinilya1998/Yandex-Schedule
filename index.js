@@ -33,7 +33,7 @@ app.post('/', async (req, res) => {
 
 
     events.forEach(event => {
-        responseText += event.name + ', в ' + event.start.getHours() + ' часов '
+        responseText += ', в ' + event.start.getHours() + ' часов: ' + event.name
     })
 
     const {version, session, request} = req.body
