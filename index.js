@@ -15,8 +15,17 @@ app.use(
 )
 
 app.post('/', async (req, res) => {
+    const { version,session } = req.body
+
+    const response = {
+        version,
+        session,
+        response: {
+            "end_session": false,
+        }
+    }
     console.log(req.body)
-    res.send('Done')
+    res.send(response)
 })
 
 app.listen(PORT, () => {
