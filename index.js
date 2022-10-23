@@ -17,7 +17,7 @@ const getEvents = async () => {
     const api_url = 'https://profsalon.org/CRM/msc_persona_malaya_nikitskaya/desktop/loadScheduleEvents';
     const cookies = "PHPSESSID=aid0n4viav3ke9dd377946kpb0;_ym_uid=1666536337347538161;_ym_d=1666536337;_ym_isad=2"
     const { data } = await axios.post(api_url, {
-        day: tommorow,
+        day: '22.10.2022',
     }, {
         headers: {
             Cookie: cookies,
