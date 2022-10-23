@@ -48,8 +48,9 @@ app.post('/', async (req, res) => {
             end_session: false,
         }
     }
+    events.length = 0;
 
-    if (session.new) response.response.text = 'На какой день показать запись?'
+    if (session.new) response.response.text = 'Я умею находить записи на сегодня и на завтра, на какой день вам показать?'
     else if (!events.length){
         response.response.text = 'На указанный период никто не записался';
         response.response.end_session = true;
