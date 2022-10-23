@@ -27,11 +27,9 @@ const getEvents = async () => {
 }
 
 app.use(express.json())
-app.use(
-    express.urlencoded({
+app.use(express.urlencoded({
         extended: true
-    })
-)
+    }))
 
 
 app.post('/', async (req, res) => {
@@ -54,10 +52,8 @@ app.post('/', async (req, res) => {
         console.log(e)
         response.response.text = 'Произошла ошибка при запросе данных из салона'
         response.response.end_session = true;
-        res.send(response)
+        return res.send(response);
     }
-
-    console.log(data)
 
     let events = data.events.filter(event => event.id).map(event => ({
         ...event,
@@ -70,7 +66,7 @@ app.post('/', async (req, res) => {
 
     if (session.new) {
         response.response.text = 'Я умею находить записи на сегодня и на завтра, на какой день вам показать?';
-        res.send(response);
+        return res.send(response);
     }
 
     if (!events.length) {
