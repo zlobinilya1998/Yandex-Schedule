@@ -14,7 +14,8 @@ app.use(
     })
 )
 
-app.post('/message', async (req, res) => {
+app.post('/', async (req, res) => {
+    console.log(req.body)
     res.send('Done')
 })
 
