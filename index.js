@@ -23,7 +23,7 @@ app.post('/', async (req, res) => {
     }, {
         headers: {
             Cookie: cookies,
-        }
+        },
     })
 
     let events = data.events.filter(event => event.id).map(event => ({
@@ -33,11 +33,12 @@ app.post('/', async (req, res) => {
 
 
     events.forEach(event => {
-        responseText += event.name + ','
+        responseText += event.name + ', в ' + event.start
     })
 
-    const {version, session} = req.body
+    const {version, session, request} = req.body
 
+    const userCommand = request.command;
     const response = {
         version,
         session,
@@ -46,7 +47,11 @@ app.post('/', async (req, res) => {
         }
     }
 
-    if (session.new) response.response.text = 'За какой день показать запись?'
+    if (session.new) response.response.text = 'На какой день показать запись?'
+    else if (!events.length){
+        response.response.text = 'На указанный период никто не записался';
+        response.response.end_session = true;
+    }
     else {
         response.response.text = 'Запись на завтра - это ' + responseText;
         response.response.end_session = true;
