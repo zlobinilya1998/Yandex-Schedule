@@ -33,7 +33,7 @@ app.post('/', async (req, res) => {
 
 
     events.forEach(event => {
-        responseText += event.name + ' '
+        responseText += event.name + ','
     })
 
     const {version, session} = req.body
@@ -48,7 +48,7 @@ app.post('/', async (req, res) => {
 
     if (session.new) response.response.text = 'За какой день показать запись?'
     else {
-        response.response.text = 'Запись на завтра - это' + responseText;
+        response.response.text = 'Запись на завтра - это ' + responseText;
         response.response.end_session = true;
     }
 
