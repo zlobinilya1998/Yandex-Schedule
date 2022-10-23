@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { config } from 'dotenv'
+import {config} from 'dotenv'
 import express from 'express'
 
 
@@ -15,19 +15,22 @@ app.use(
 )
 
 app.post('/', async (req, res) => {
-    const { version,session } = req.body
+    const {version, session} = req.body
 
     const response = {
         version,
         session,
         response: {
-            "end_session": false,
+            end_session: false,
         }
     }
     console.log(req.body)
 
     if (session.new) response.response.text = 'За какой день показать запись?'
-    else response.response.text = 'Запись на завтра - это'
+    else {
+        response.response.text = 'Запись на завтра - это';
+        response.response.end_session = true;
+    }
 
     res.send(response)
 })
