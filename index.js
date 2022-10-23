@@ -36,7 +36,7 @@ app.use(
 
 app.post('/', async (req, res) => {
     const {version, session, request} = req.body
-    const userCommand = request.command.toLowerCase();
+    const userCommand = request?.command?.toLowerCase();
     const response = {
         version,
         session,
@@ -50,6 +50,7 @@ app.post('/', async (req, res) => {
     try {
         data = await getEvents();
     } catch (e) {
+        console.log(e)
         response.response.text = 'Произошла ошибка при запросе данных из салона'
         res.send(response)
     }
