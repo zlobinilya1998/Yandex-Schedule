@@ -9,10 +9,10 @@ const app = express()
 
 
 const getEvents = async () => {
-    const today = new Date().toLocaleString().split(',')[0];
+    const today = new Date().toLocaleString().split(',')[0].replaceAll('/','.');
     let tommorow = new Date()
     tommorow.setDate(tommorow.getDate() + 1);
-    tommorow = tommorow.toLocaleString().split(',')[0]
+    tommorow = tommorow.toLocaleString().split(',')[0].replaceAll('/','.')
 
     const api_url = 'https://profsalon.org/CRM/msc_persona_malaya_nikitskaya/desktop/loadScheduleEvents';
     const cookies = "PHPSESSID=aid0n4viav3ke9dd377946kpb0;_ym_uid=1666536337347538161;_ym_d=1666536337;_ym_isad=2"
