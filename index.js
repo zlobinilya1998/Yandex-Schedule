@@ -34,6 +34,8 @@ app.post('/', async (req, res) => {
         return res.send(response);
     }
 
+    console.log('EVENTS',data)
+
     const events = EventsTransformer.transformIntoView(data.events);
     events.forEach(event => responseText += EventsTransformer.getEventText(event));
 
