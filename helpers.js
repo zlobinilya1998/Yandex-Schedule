@@ -9,7 +9,7 @@ export class EventsTransformer {
         let services = 'Услуги: ';
         event.services.forEach(service => {
             if (service.service_name.toLowerCase().includes('сертификат')) return;
-            services += service.service_name + ', '
+            services += service.service_name + ', \n'
         })
 
         const clientComment = event.client_comment ? `, комментарий от клиента: ${event.client_comment}` : ''
@@ -17,8 +17,8 @@ export class EventsTransformer {
 
         const price = event.payment_method.slice(0,index).replace(' ','')
         let priceText = ''
-        if (price > 0) priceText += ` Стоимость ${price} рублей`;
+        if (price > 0) priceText += ` Стоимость ${price} рублей\n`;
 
-        return 'Клиент ' + event.name + priceText + services + ', в ' + event.start.getHours() + ' часов: '
+        return 'Клиент ' + event.name + '/n' + priceText + services + ', в ' + event.start.getHours() + ' часов: '
     }
 }
