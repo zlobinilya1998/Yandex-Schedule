@@ -48,7 +48,7 @@ app.post('/', async (req, res) => {
         response.response.text = `На ${forceToday ? 'сегодня' : 'завтра'} никто не записался, можете отдохнуть`;
         response.response.end_session = true;
     } else {
-        response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'} - это ` + responseText;
+        response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'}:` + responseText;
         response.response.end_session = true;
     }
 
@@ -56,9 +56,13 @@ app.post('/', async (req, res) => {
 })
 app.post('/test', async (req, res) => {
     try {
-        const data = await SalonService.loadEvents()
+        let responseText = ''
+        const data = await SalonService.loadEvents(true)
         const events = EventsTransformer.transformIntoView(data.events);
-        return res.send(events);
+
+        events.forEach(event => responseText += EventsTransformer.getEventText(event));
+
+        return res.send({events,responseText});
     } catch (e) {
         console.log(e)
         res.send(e)

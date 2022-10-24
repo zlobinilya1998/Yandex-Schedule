@@ -5,5 +5,9 @@ export class EventsTransformer {
             .map(event => ({...event, start: new Date(event.start)}))
             .sort((a, b) => a.start - b.start)
     }
-    static getEventText = (event) => ', в ' + event.start.getHours() + ' часов: ' + event.name
+    static getEventText = (event) => {
+        let services = '';
+        event.services.forEach(service => services += service.service_name)
+        return services + ', в ' + event.start.getHours() + ' часов: ' + event.name
+    }
 }
