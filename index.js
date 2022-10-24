@@ -55,7 +55,7 @@ app.post('/', async (req, res) => {
 app.post('/test', async (req, res) => {
     try {
         let responseText = ''
-        const data = await SalonService.loadEvents(true)
+        const data = await SalonService.loadEvents(false)
         const events = EventsTransformer.transformIntoView(data.events);
 
         events.forEach(event => responseText += EventsTransformer.getEventText(event));

@@ -8,6 +8,9 @@ export class EventsTransformer {
     static getEventText = (event) => {
         let services = '';
         event.services.forEach(service => services += service.service_name)
-        return services + ', в ' + event.start.getHours() + ' часов: ' + event.name
+
+        const clientComment = event.client_comment ? `, комментарий от клиента: ${event.client_comment}` : ''
+
+        return services + ', в ' + event.start.getHours() + ' часов: ' + event.name + clientComment
     }
 }
