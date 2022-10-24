@@ -16,6 +16,7 @@ app.post('/', async (req, res) => {
     const {version, session, request} = req.body
     const userCommand = request.command.toLowerCase();
     const forceToday = userCommand.includes('сегодня');
+    const step = session.message_id;
     const response = {
         version,
         session,
@@ -42,12 +43,18 @@ app.post('/', async (req, res) => {
         return res.send(response);
     }
 
-    if (!events.length) {
-        response.response.text = `На ${forceToday ? 'сегодня' : 'завтра'} никто не записался, можете отдохнуть`;
-        response.response.end_session = true;
-    } else {
-        response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'}:` + responseText;
-        response.response.end_session = true;
+    //Only for first step
+    if (step === 1){
+        if (events.length){
+            response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'}:` + responseText;
+        } else {
+            response.response.text = `На ${forceToday ? 'сегодня' : 'завтра'} никто не записался, можете отдохнуть`;
+            response.response.end_session = true;
+        }
+    }
+
+    if (step === 2){
+        response.response.text = 'Если хотите,я могу прочитать комментарии от клиентов';
     }
 
     res.send(response)
@@ -55,7 +62,7 @@ app.post('/', async (req, res) => {
 app.post('/test', async (req, res) => {
     try {
         let responseText = ''
-        const data = await SalonService.loadEvents(false)
+        const data = await SalonService.loadEvents(true)
         const events = EventsTransformer.transformIntoView(data.events);
 
         events.forEach(event => responseText += EventsTransformer.getEventText(event));
