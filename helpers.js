@@ -17,8 +17,8 @@ export class EventsTransformer {
 
         const price = event.payment_method.slice(0,index).replace(' ','')
         let priceText = ''
-        if (price > 0) priceText += ` Стоимость ${price} рублей\n`;
+        if (price > 0) priceText += ` Стоимость ${price} рублей \n`;
 
-        return 'Клиент ' + event.name + '/n' + priceText + services + ', в ' + event.start.getHours() + ' часов: '
+        return 'Клиент ' + event.name + ' \n ' + priceText + services + ', в ' + event.start.getHours() + ' часов: '
     }
 }

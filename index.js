@@ -49,6 +49,7 @@ app.post('/', async (req, res) => {
     if (step === 1){
         if (events.length){
             response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'}:` + responseText;
+            response.response.end_session = true;
         } else {
             response.response.text = `На ${forceToday ? 'сегодня' : 'завтра'} никто не записался, можете отдохнуть`;
             response.response.end_session = true;
