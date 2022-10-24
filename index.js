@@ -53,8 +53,8 @@ app.post('/', async (req, res) => {
         }
     }
 
+    //Only for second step
     if (step === 2){
-        response.response.text = 'Если хотите,я могу прочитать комментарии от клиентов';
     }
 
     res.send(response)

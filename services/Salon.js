@@ -14,7 +14,7 @@ class SalonService {
 
         const api_url = this.baseUrl + '/loadScheduleEvents';
         const { data } = await axios.post(api_url, {
-            day: forceToday ? today : tomorow,
+            day: '22.10.2022',
         }, {
             headers: {
                 Cookie
