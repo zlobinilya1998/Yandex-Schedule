@@ -17,6 +17,8 @@ app.post('/', async (req, res) => {
     const userCommand = request.command.toLowerCase();
     const forceToday = userCommand.includes('сегодня');
     const step = session.message_id;
+
+    console.log(request.request)
     const response = {
         version,
         session,
