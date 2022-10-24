@@ -11,7 +11,9 @@ export class EventsTransformer {
 
         const clientComment = event.client_comment ? `, комментарий от клиента: ${event.client_comment}` : ''
         const index = event.payment_method.indexOf('руб.', 0);
-        const price = ' Стоимость' + event.payment_method.slice(0,index) + 'рублей\n';
-        return services + ', в ' + event.start.getHours() + ' часов: ' + event.name + price
+
+        const price = event.payment_method.slice(0,index);
+        const priceText = price ? ` Стоимость ${price} рублей\n` : '';
+        return services + ', в ' + event.start.getHours() + ' часов: ' + event.name + priceText
     }
 }
