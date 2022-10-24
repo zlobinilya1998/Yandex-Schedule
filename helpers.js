@@ -6,8 +6,9 @@ export class EventsTransformer {
             .sort((a, b) => a.start - b.start)
     }
     static getEventText = (event) => {
-        let services = 'Услуги: ';
-        event.services.forEach(service => {
+        let services = '';
+        event.services.forEach((service,index) => {
+            if (index === 0) services += 'Услуги: '
             if (service.service_name.toLowerCase().includes('сертификат')) return;
             services += service.service_name + ', \n'
         })
