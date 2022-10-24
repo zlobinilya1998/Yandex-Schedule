@@ -6,14 +6,19 @@ export class EventsTransformer {
             .sort((a, b) => a.start - b.start)
     }
     static getEventText = (event) => {
-        let services = '';
-        event.services.forEach(service => services += service.service_name)
+        let services = 'Услуги: ';
+        event.services.forEach(service => {
+            if (service.service_name.toLowerCase().includes('сертификат')) return;
+            services += service.service_name + ', '
+        })
 
         const clientComment = event.client_comment ? `, комментарий от клиента: ${event.client_comment}` : ''
-        const index = event.payment_method.indexOf('руб.', 0);
+        const index = event.payment_method.indexOf('руб.', 0)
 
-        const price = event.payment_method.slice(0,index);
-        const priceText = price ? ` Стоимость ${price} рублей\n` : '';
-        return services + ', в ' + event.start.getHours() + ' часов: ' + event.name + priceText
+        const price = event.payment_method.slice(0,index).replace(' ','')
+        let priceText = ''
+        if (price > 0) priceText += ` Стоимость ${price} рублей`;
+
+        return 'Клиент ' + event.name + priceText + services + ', в ' + event.start.getHours() + ' часов: '
     }
 }
