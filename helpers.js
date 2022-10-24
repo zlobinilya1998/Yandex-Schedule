@@ -19,6 +19,6 @@ export class EventsTransformer {
         let priceText = ''
         if (price > 0) priceText += ` Стоимость ${price} рублей \n`;
 
-        return 'Клиент ' + event.name + ' \n ' + priceText + services + ', в ' + event.start.getHours() + ' часов: '
+        return 'Клиент ' + event.name + ' \n ' + priceText + services + ', \n запись в  ' + event.start.getHours() + ' часов: '
     }
 }
