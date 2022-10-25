@@ -1,8 +1,23 @@
+import {getDefaultResponse} from "../helpers";
+
 const {EventsTransformer} = require("../helpers");
 const SalonService = require("../services/Salon");
 
 const specific = async (req,res) => {
+    const response = getDefaultResponse(req.body);
+    const entities = response.request.nlu.entities;
+
+
+    if (entities.some(entity => entity.type === "YANDEX.NUMBER")){
+        return res.send(entities)
+    }
+
+
     let data = [];
+
+
+
+
     try {
         data = await SalonService.loadEvents(true)
     } catch (e) {

@@ -1,8 +1,9 @@
 const getDefaultResponse = (body) => {
-    const { version, session } = body
+    const { version, session, request } = body
     return {
         version,
         session,
+        request,
         response: {
             end_session: false,
         }
