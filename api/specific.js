@@ -8,8 +8,12 @@ const specific = async (req,res) => {
     const entities = response.request.nlu.entities;
 
 
-    if (entities.some(entity => entity.type === "YANDEX.DATETIME")){
-        return res.send(entities)
+    const dateTime = entities.find(entity => entity.type === "YANDEX.DATETIME");
+
+    if (dateTime){
+        const month = dateTime.value.month;
+        const day = dateTime.value.day;
+        return res.send({month,day})
     }
 
 
