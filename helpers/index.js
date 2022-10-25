@@ -36,10 +36,12 @@ const getServices = (event) => {
 
         if (service.service_name.toLowerCase().includes('сертификат')) return;
 
-        services += service.service_name + ','
+        services += service.service_name
 
+        if (event.services[index + 1]) services += ','
+        else services += '.'
     })
-    services += '. \n '
+    services += ' \n '
     return services
 }
 const getClientComment = (event) => {
