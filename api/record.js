@@ -3,7 +3,7 @@ const SalonService = require("../services/Salon");
 
 export default async function record(req,res){
     const response = getDefaultResponse(req.body);
-    const tokens = response.request.nlu.entities.tokens;
+    const tokens = response.request.nlu.tokens;
 
     const isToday = tokens.includes('сегодня');
     const isTomorrow = tokens.includes('завтра');
