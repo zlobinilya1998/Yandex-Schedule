@@ -1,5 +1,6 @@
 class EventsTransformer {
     static transformIntoView(events){
+        console.log(events)
         return events
             .filter(event => event.id !== 0)
             .map(event => ({...event, start: new Date(event.start)}))
