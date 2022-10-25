@@ -20,7 +20,7 @@ const getClientsCount = (event) => {
     return `Количество клиентов - ${clients} \n `
 }
 const getClientName = (event) => {
-    return `Клиент ${event.name} \n `
+    return `Клиент - ${event.name} \n `
 }
 const getPrice = (event) => {
     const index = event.payment_method.indexOf('руб.', 0)
