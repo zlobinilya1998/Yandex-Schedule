@@ -8,7 +8,7 @@ const specific = async (req,res) => {
     const entities = response.request.nlu.entities;
 
 
-    if (entities.some(entity => entity.type === "YANDEX.NUMBER")){
+    if (entities.some(entity => entity.type === "YANDEX.DATETIME")){
         return res.send(entities)
     }
 
