@@ -10,11 +10,6 @@ const specific = async (req,res) => {
 
     const dateTime = entities.find(entity => entity.type === "YANDEX.DATETIME");
 
-    if (response.session.new){
-        response.response.text = 'За какую дату показать запись?';
-        return res.send(response)
-    }
-
     let data = [];
     if (dateTime){
         const month = dateTime.value.month;
