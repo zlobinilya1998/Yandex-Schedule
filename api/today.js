@@ -3,8 +3,6 @@ const SalonService = require("../services/Salon");
 
 export default async function today(req,res){
     const response = getDefaultResponse(req.body);
-
-    console.log('LOGGER:',response)
     let data = [];
     try {
         data = await SalonService.loadEvents(true)
