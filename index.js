@@ -59,6 +59,7 @@ app.post('/tomorrow', async (req, res) => {
 app.post('/specific', async (req, res) => {
     const response = getDefaultResponse(req.body);
 
+    console.log(response)
     response.response.text = 'Выбранный день';
     response.response.end_session = true;
     res.send(response)
