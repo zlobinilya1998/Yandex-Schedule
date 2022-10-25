@@ -22,5 +22,24 @@ class SalonService {
         })
         return data;
     }
+    static async loadSpecificEvents(day,month){
+        let date = new Date();
+
+        if (day) date.setDate(day)
+        if (month) date.setMonth(month)
+
+        date = date.toLocaleString('ru-Ru').split(',')[0]
+
+        const api_url = this.baseUrl + '/loadScheduleEvents';
+        const { data } = await axios.post(api_url, {
+            day: date,
+        }, {
+            headers: {
+                Cookie
+            },
+        })
+        return data;
+    }
+
 }
 module.exports = SalonService;

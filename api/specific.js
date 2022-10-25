@@ -13,26 +13,12 @@ const specific = async (req,res) => {
     if (dateTime){
         const month = dateTime.value.month;
         const day = dateTime.value.day;
-        return res.send({month,day})
+
+        const events = await SalonService.loadSpecificEvents(day,month);
+        return res.send(events)
     }
 
-
-    let data = [];
-
-
-
-
-    try {
-        data = await SalonService.loadEvents(true)
-    } catch (e) {
-        return res.status(500).send();
-    }
-
-    const events = EventsTransformer.transformIntoView(data.events);
-    let eventsText = ''
-    events.forEach(event => eventsText += EventsTransformer.getEventText(event));
-
-    res.send(eventsText)
+    res.send('No data')
 }
 
 export default specific;
