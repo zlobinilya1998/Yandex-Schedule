@@ -29,6 +29,7 @@ const specific = async (req,res) => {
             return res.send(response)
         } catch (e) {
             response.response.text = BotErrors.UnhandedException;
+            response.response.end_session = true;
             return res.send(response)
         }
 
