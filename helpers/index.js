@@ -9,6 +9,43 @@ const getDefaultResponse = (body) => {
     }
 }
 
+const getTime = (event) => {
+    const hours = event.start.getHours();
+    const minutes = event.start.getMinutes();
+    const timeZone = 3;
+    return `Запись в ${hours + timeZone}:${minutes > 0 ? minutes : '00'} \n '`
+}
+const getClientsCount = (event) => {
+    const clients = event.services.length;
+    return `Количество клиентов - ${clients} \n `
+}
+const getClientName = (event) => {
+    return `Клиент ${event.name} \n `
+}
+const getPrice = (event) => {
+    const index = event.payment_method.indexOf('руб.', 0)
+    const price = event.payment_method.slice(0,index).replace(' ','')
+    if (price > 0) return `Стоимость ${price} рублей \n `;
+    else return ``
+}
+const getServices = (event) => {
+    let services = '';
+
+    event.services.forEach((service,index) => {
+        if (index === 0) services += 'Услуги: '
+
+        if (service.service_name.toLowerCase().includes('сертификат')) return;
+
+        services += service.service_name + ','
+
+    })
+    services += '. \n '
+    return services
+}
+const getClientComment = (event) => {
+    const comment = event.client_comment ? `Комментарий от клиента: ${event.client_comment} \n ` : ''
+    return comment
+}
 class EventsTransformer {
     static transformIntoView(events){
         return events
@@ -17,23 +54,12 @@ class EventsTransformer {
             .sort((a, b) => a.start - b.start)
     }
     static getEventText = (event) => {
-        let services = '';
-        event.services.forEach((service,index) => {
-            if (index === 0) services += 'Услуги: '
-            if (service.service_name.toLowerCase().includes('сертификат')) return;
-            services += service.service_name + ', \n'
-        })
+        const time = getTime(event)
+        const clientName = getClientName(event)
+        const priceText = getPrice(event)
+        const services = getServices(event)
 
-        const clients = event.services.length;
-
-        const clientComment = event.client_comment ? `, комментарий от клиента: ${event.client_comment}` : ''
-        const index = event.payment_method.indexOf('руб.', 0)
-
-        const price = event.payment_method.slice(0,index).replace(' ','')
-        let priceText = ''
-        if (price > 0) priceText += ` Стоимость ${price} рублей \n`;
-
-        return `Количество клиентов - ${clients} \n` + 'Запись в ' + event.start.getHours() + ' часов. \n' + 'Клиент ' + event.name + ' \n ' + priceText + services;
+        return time + clientName + priceText + services;
     }
 }
 
