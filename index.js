@@ -56,5 +56,14 @@ app.post('/tomorrow', async (req, res) => {
     res.send(response)
 })
 
+app.post('/specific', async (req, res) => {
+    const response = getDefaultResponse(req.body);
+
+    response.response.text = '';
+    response.response.end_session = true;
+    res.send(response)
+})
+
+
 module.exports = app
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
