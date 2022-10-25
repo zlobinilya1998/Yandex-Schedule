@@ -1,7 +1,7 @@
 const express = require('express')
 const SalonService = require('./services/Salon')
-const EventsTransformer = require('./helpers')
 const {config} = require('dotenv')
+const {getDefaultResponse,EventsTransformer} = require('./helpers')
 config()
 
 const PORT = process.env.PORT || 3000
@@ -16,8 +16,6 @@ app.post('/', async (req, res) => {
     const userCommand = request.command.toLowerCase();
     const forceToday = userCommand.includes('сегодня');
     const step = session.message_id;
-
-    console.log(request)
     const response = {
         version,
         session,
@@ -45,8 +43,8 @@ app.post('/', async (req, res) => {
     }
 
     //Only for first step
-    if (step === 1){
-        if (events.length){
+    if (step === 1) {
+        if (events.length) {
             response.response.text = `Запись на ${forceToday ? 'сегодня' : 'завтра'}:` + responseText;
             response.response.end_session = true;
         } else {
@@ -56,26 +54,55 @@ app.post('/', async (req, res) => {
     }
 
     //Only for second step
-    if (step === 2){
+    if (step === 2) {
     }
 
     res.send(response)
 })
-app.post('/test', async (req, res) => {
+app.post('/today', async (req, res) => {
+    const response = getDefaultResponse(req.body);
+
+    let data = [];
     try {
-        let responseText = ''
-        const data = await SalonService.loadEvents(true)
-        const events = EventsTransformer.transformIntoView(data.events);
-
-        events.forEach(event => responseText += EventsTransformer.getEventText(event));
-
-        return res.send({events,responseText});
+        data = await SalonService.loadEvents(true)
     } catch (e) {
-        console.log(e)
-        res.send(e)
+        response.response.text = 'Произошла ошибка при запросе данных из салона'
+        response.response.end_session = true;
+        return res.send(response);
     }
-})
 
+    const events = EventsTransformer.transformIntoView(data.events);
+    let eventsText = ''
+    events.forEach(event => eventsText += EventsTransformer.getEventText(event));
+
+    if (events.length) response.response.text = 'Запись на сегодня: ' + eventsText;
+    else response.response.text = 'На сегодня никто не записался, можете отдохнуть';
+
+    response.response.end_session = true;
+    res.send(response)
+})
+app.post('/tomorrow', async (req, res) => {
+    const response = getDefaultResponse(req.body);
+
+    let data = [];
+    try {
+        data = await SalonService.loadEvents(false)
+    } catch (e) {
+        response.response.text = 'Произошла ошибка при запросе данных из салона'
+        response.response.end_session = true;
+        return res.send(response);
+    }
+
+    const events = EventsTransformer.transformIntoView(data.events);
+    let eventsText = ''
+    events.forEach(event => eventsText += EventsTransformer.getEventText(event));
+
+    if (events.length) response.response.text = 'Запись на завтра: ' + eventsText;
+    else response.response.text = 'На завтра никто не записался, можете отдохнуть';
+
+    response.response.end_session = true;
+    res.send(response)
+})
 
 module.exports = app
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

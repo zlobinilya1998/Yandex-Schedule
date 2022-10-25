@@ -1,6 +1,16 @@
+const getDefaultResponse = (body) => {
+    const { version, session } = body
+    return {
+        version,
+        session,
+        response: {
+            end_session: false,
+        }
+    }
+}
+
 class EventsTransformer {
     static transformIntoView(events){
-        console.log(events)
         return events
             .filter(event => event.id !== 0)
             .map(event => ({...event, start: new Date(event.start)}))
@@ -21,8 +31,11 @@ class EventsTransformer {
         let priceText = ''
         if (price > 0) priceText += ` Стоимость ${price} рублей \n`;
 
-        return 'Клиент ' + event.name + ' \n ' + priceText + services + ', \n запись в  ' + event.start.getHours() + ' часов: '
+        return 'Запись в ' + event.start.getHours() + ' часов. \n' + 'Клиент ' + event.name + ' \n ' + priceText + services;
     }
 }
 
-module.exports = EventsTransformer
+module.exports = {
+    getDefaultResponse,
+    EventsTransformer,
+}
