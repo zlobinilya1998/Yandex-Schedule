@@ -29,6 +29,7 @@ const specific = async (req,res) => {
 
             if (events.length) response.response.text = eventsText;
             else response.response.text = 'На выбранный период никто не записался';
+            response.response.end_session = true;
             return res.send(response)
         } catch (e) {
             response.response.text = e;
