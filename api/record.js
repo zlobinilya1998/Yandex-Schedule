@@ -1,3 +1,5 @@
+import BotErrors from "../errors";
+
 const {getDefaultResponse, EventsTransformer} = require("../helpers");
 const SalonService = require("../services/Salon");
 
@@ -9,7 +11,7 @@ export default async function record(req,res){
     const isTomorrow = tokens.includes('завтра');
 
     if (!isToday && !isTomorrow) {
-        response.response.text = 'Я могу говорить запись только на сегодня или на завтра';
+        response.response.text = BotErrors.InvalidInputDay;
         response.response.end_session = true;
         return res.send(response);
     }
@@ -19,7 +21,7 @@ export default async function record(req,res){
     try {
         data = await SalonService.loadEvents(isToday)
     } catch (e) {
-        response.response.text = 'Произошла ошибка при запросе данных из салона'
+        response.response.text = BotErrors.FetchDataError;
         response.response.end_session = true;
         return res.send(response);
     }
@@ -29,7 +31,7 @@ export default async function record(req,res){
     events.forEach(event => eventsText += EventsTransformer.getEventText(event));
 
     if (events.length) response.response.text = eventsText;
-    else response.response.text = 'На выбранную дату никто не записался, можете отдохнуть';
+    else response.response.text = BotErrors.NoPeriodRecords;
     response.response.end_session = true;
     res.send(response)
 }

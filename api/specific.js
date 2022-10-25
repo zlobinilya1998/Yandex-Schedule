@@ -1,4 +1,5 @@
 import {getDefaultResponse} from "../helpers";
+import BotErrors from "../errors";
 
 const {EventsTransformer} = require("../helpers");
 const SalonService = require("../services/Salon");
@@ -23,16 +24,16 @@ const specific = async (req,res) => {
             events.forEach(event => eventsText += EventsTransformer.getEventText(event));
 
             if (events.length) response.response.text = eventsText;
-            else response.response.text = 'На выбранный период никто не записался';
+            else response.response.text = BotErrors.NoPeriodRecords;
             response.response.end_session = true;
             return res.send(response)
         } catch (e) {
-            response.response.text = e;
+            response.response.text = BotErrors.UnhandedException;
             return res.send(response)
         }
 
     } else {
-        response.response.text = 'Мне не удалось распознать дату';
+        response.response.text = BotErrors.ParseDateError;
         response.session.end_session = true;
     }
 
