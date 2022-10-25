@@ -27,7 +27,6 @@ class SalonService {
 
         if (day) date.setDate(day)
         if (month) date.setMonth(month - 1)
-
         date = date.toLocaleString('ru-Ru').split(',')[0]
 
         const api_url = this.baseUrl + '/loadScheduleEvents';
