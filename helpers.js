@@ -1,4 +1,4 @@
-export class EventsTransformer {
+class EventsTransformer {
     static transformIntoView(events){
         return events
             .filter(event => event.id !== 0)
@@ -23,3 +23,5 @@ export class EventsTransformer {
         return 'Клиент ' + event.name + ' \n ' + priceText + services + ', \n запись в  ' + event.start.getHours() + ' часов: '
     }
 }
+
+module.exports = EventsTransformer

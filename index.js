@@ -1,8 +1,7 @@
-import {config} from 'dotenv'
-import express from 'express'
-import SalonService from "../services/Salon.js";
-import {EventsTransformer} from "../helpers.js";
-
+const express = require('express')
+const SalonService = require('./services/Salon')
+const EventsTransformer = require('./helpers')
+const {config} = require('dotenv')
 config()
 
 const PORT = process.env.PORT || 3000
@@ -78,3 +77,5 @@ app.post('/test', async (req, res) => {
 })
 
 
+module.exports = app
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
