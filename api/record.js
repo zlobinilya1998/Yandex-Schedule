@@ -9,7 +9,7 @@ export default async function record(req,res){
     const isTomorrow = tokens.includes('завтра');
 
     if (!isToday && !isTomorrow) {
-        response.response.text = 'Не могу распознать выбранный день';
+        response.response.text = 'Я могу говорить запись только на сегодня или на завтра';
         response.response.end_session = true;
         return res.send(response);
     }
