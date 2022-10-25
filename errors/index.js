@@ -3,7 +3,7 @@ const BotErrors = {
     NoPeriodRecords: 'На выбранный период никто не записался',
     ParseDateError: 'Мне не удалось распознать дату',
     InvalidInputDay: 'Я могу говорить запись только на сегодня или на завтра',
-    UnhandedException: 'Неопознная ошибка',
+    UnhandedException: 'Неопознанная ошибка',
 }
 
 export default BotErrors;
