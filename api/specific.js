@@ -16,9 +16,12 @@ const specific = async (req,res) => {
 
         const events = await SalonService.loadSpecificEvents(day,month);
         return res.send(events)
+    } else {
+        response.response.text = 'Мне не удалось распознать дату';
+        response.session.end_session = true;
     }
 
-    res.send('No data')
+    res.send({response})
 }
 
 export default specific;

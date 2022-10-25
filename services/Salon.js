@@ -28,6 +28,8 @@ class SalonService {
         if (day) date.setDate(day)
         if (month) date.setMonth(month)
 
+        return date
+
         date = date.toLocaleString('ru-Ru').split(',')[0]
 
         const api_url = this.baseUrl + '/loadScheduleEvents';
