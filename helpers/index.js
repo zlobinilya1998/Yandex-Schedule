@@ -24,6 +24,8 @@ class EventsTransformer {
             services += service.service_name + ', \n'
         })
 
+        const clients = event.services.length;
+
         const clientComment = event.client_comment ? `, комментарий от клиента: ${event.client_comment}` : ''
         const index = event.payment_method.indexOf('руб.', 0)
 
@@ -31,7 +33,7 @@ class EventsTransformer {
         let priceText = ''
         if (price > 0) priceText += ` Стоимость ${price} рублей \n`;
 
-        return 'Запись в ' + event.start.getHours() + ' часов. \n' + 'Клиент ' + event.name + ' \n ' + priceText + services;
+        return `Количество клиентов - ${clients} \n` + 'Запись в ' + event.start.getHours() + ' часов. \n' + 'Клиент ' + event.name + ' \n ' + priceText + services;
     }
 }
 

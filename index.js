@@ -27,7 +27,7 @@ app.post('/today', async (req, res) => {
     let eventsText = ''
     events.forEach(event => eventsText += EventsTransformer.getEventText(event));
 
-    if (events.length) response.response.text = 'Запись на сегодня: ' + eventsText;
+    if (events.length) response.response.text = eventsText;
     else response.response.text = 'На сегодня никто не записался, можете отдохнуть';
 
     response.response.end_session = true;
@@ -49,7 +49,7 @@ app.post('/tomorrow', async (req, res) => {
     let eventsText = ''
     events.forEach(event => eventsText += EventsTransformer.getEventText(event));
 
-    if (events.length) response.response.text = 'Запись на завтра: ' + eventsText;
+    if (events.length) response.response.text = eventsText;
     else response.response.text = 'На завтра никто не записался, можете отдохнуть';
 
     response.response.end_session = true;
