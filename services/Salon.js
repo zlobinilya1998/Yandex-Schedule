@@ -26,9 +26,7 @@ class SalonService {
         let date = new Date();
 
         if (day) date.setDate(day)
-        if (month) date.setMonth(month)
-
-        return date
+        if (month) date.setMonth(month - 1)
 
         date = date.toLocaleString('ru-Ru').split(',')[0]
 
