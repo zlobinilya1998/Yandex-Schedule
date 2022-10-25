@@ -25,8 +25,10 @@ class SalonService {
     static async loadSpecificEvents(day,month){
         let date = new Date();
 
-        if (day) date.setDate(day)
-        if (month) date.setMonth(month - 1)
+        if (!day || !month) return Promise.reject('Не удалось распознать дату')
+
+        date.setDate(day)
+        date.setMonth(month - 1)
         date = date.toLocaleString('ru-Ru').split(',')[0]
 
         const api_url = this.baseUrl + '/loadScheduleEvents';
