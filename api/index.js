@@ -1,7 +1,7 @@
 import {config} from 'dotenv'
 import express from 'express'
-import SalonService from "./services/Salon.js";
-import {EventsTransformer} from "./helpers.js";
+import SalonService from "../services/Salon.js";
+import {EventsTransformer} from "../helpers.js";
 
 config()
 
