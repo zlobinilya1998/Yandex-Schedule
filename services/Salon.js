@@ -2,6 +2,7 @@ const {config} = require('dotenv')
 config()
 
 const axios = require('axios')
+const BotErrors = require("../errors");
 const Cookie = process.env.COOKIE
 
 class SalonService {
@@ -25,7 +26,7 @@ class SalonService {
     static async loadSpecificEvents(day,month){
         let date = new Date();
 
-        if (!day || !month) return Promise.reject('Не удалось распознать дату')
+        if (!day || !month) return Promise.reject(BotErrors.ParseDateError)
 
         date.setDate(day)
         date.setMonth(month - 1)
