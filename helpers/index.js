@@ -10,6 +10,11 @@ export const getDefaultResponse = (body) => {
     }
 }
 
+const getRandomPhrase = (arr) => {
+    const indexOfPhrase = Math.floor(Math.random() * arr.length)
+    return arr[indexOfPhrase];
+}
+
 const getTime = (event) => {
     const hours = event.start.getHours();
     const minutes = event.start.getMinutes();
