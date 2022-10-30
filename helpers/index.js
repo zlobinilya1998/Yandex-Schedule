@@ -20,6 +20,10 @@ const getClientsCount = (event) => {
     const clients = event.services.length;
     return `Количество клиентов - ${clients} \n `
 }
+const getClientComment = (event) => {
+    const comment = event.client_comment ? `Комментарий от клиента: ${event.client_comment} \n ` : ''
+    return comment
+}
 const getClientName = (event) => {
     return `Клиент - ${event.name} \n `
 }
@@ -45,10 +49,7 @@ const getServices = (event) => {
     services += ' \n '
     return services
 }
-const getClientComment = (event) => {
-    const comment = event.client_comment ? `Комментарий от клиента: ${event.client_comment} \n ` : ''
-    return comment
-}
+
 export class EventsTransformer {
     static transformIntoView(events){
         return events

@@ -1,6 +1,6 @@
 import {config} from 'dotenv'
 import axios from 'axios';
-import BotErrors from "../errors/index.js";
+import {BotErrors} from "../models/Entities.js";
 
 config()
 
@@ -8,14 +8,15 @@ const Cookie = process.env.COOKIE
 
 class SalonService {
     static baseUrl = 'https://profsalon.org/CRM/msc_persona_malaya_nikitskaya/desktop';
-    static async loadEvents(forceToday = false){
+
+    static async loadEvents(forceToday = false) {
         const today = new Date().toLocaleString('ru-Ru').split(',')[0];
         let tomorow = new Date()
         tomorow.setDate(tomorow.getDate() + 1);
         tomorow = tomorow.toLocaleString('ru-Ru').split(',')[0]
 
         const api_url = this.baseUrl + '/loadScheduleEvents';
-        const { data } = await axios.post(api_url, {
+        const {data} = await axios.post(api_url, {
             day: forceToday ? today : tomorow,
         }, {
             headers: {
@@ -24,7 +25,8 @@ class SalonService {
         })
         return data;
     }
-    static async loadSpecificEvents(day,month){
+
+    static async loadSpecificEvents(day, month) {
         let date = new Date();
 
         if (!day || !month) return Promise.reject(BotErrors.ParseDateError)
@@ -34,7 +36,7 @@ class SalonService {
         date = date.toLocaleString('ru-Ru').split(',')[0]
 
         const api_url = this.baseUrl + '/loadScheduleEvents';
-        const { data } = await axios.post(api_url, {
+        const {data} = await axios.post(api_url, {
             day: date,
         }, {
             headers: {

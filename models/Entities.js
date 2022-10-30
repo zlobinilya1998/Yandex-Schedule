@@ -1,3 +1,8 @@
+const Day = {
+    Today: 'сегодня',
+    Tomorrow: 'завтра',
+}
+
 const BotErrors = {
     FetchDataError: 'Произошла ошибка при запросе данных из салона',
     NoPeriodRecords: 'На выбранный период никто не записался',
@@ -6,4 +11,6 @@ const BotErrors = {
     UnhandedException: 'Неопознанная ошибка',
 }
 
-export default BotErrors;
+export {
+    Day,BotErrors
+}

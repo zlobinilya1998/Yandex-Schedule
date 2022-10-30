@@ -1,5 +1,5 @@
-import {getDefaultResponse} from "../helpers.js";
-import BotErrors from "../errors/index";
+import {getDefaultResponse} from "../helpers/index.js";
+import {BotErrors} from "../models/Entities.js";
 import {EventsTransformer} from '../helpers/index.js'
 import SalonService from '../services/Salon.js'
 
@@ -15,7 +15,7 @@ const specific = async (req, res) => {
     if (!dateTime) {
         response.response.text = BotErrors.ParseDateError;
         response.session.end_session = true;
-        return res.send({response})
+        return res.send(response)
     }
 
     const month = dateTime.value.month;

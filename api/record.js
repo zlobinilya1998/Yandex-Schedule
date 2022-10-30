@@ -1,4 +1,4 @@
-import BotErrors from '../errors/index.js'
+import {BotErrors, Day} from '../models/Entities.js'
 import {EventsTransformer,getDefaultResponse} from '../helpers/index.js'
 import SalonService from '../services/Salon.js'
 
@@ -6,8 +6,8 @@ const record = async (req,res) => {
     const response = getDefaultResponse(req.body);
     const tokens = response.request.nlu.tokens;
 
-    const isToday = tokens.includes('сегодня');
-    const isTomorrow = tokens.includes('завтра');
+    const isToday = tokens.includes(Day.Today);
+    const isTomorrow = tokens.includes(Day.Tomorrow);
 
     if (!isToday && !isTomorrow) {
         response.response.text = BotErrors.InvalidInputDay;
