@@ -123,7 +123,6 @@ describe('POST /record today', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 res.body.should.have.property('response');
-                console.log(res.body.response)
                 done();
             });
     });
@@ -137,7 +136,6 @@ describe('POST /record tomorrow', () => {
             .end((err, res) => {
                 if (err) return done(err);
                 res.body.should.have.property('response');
-                console.log(res.body.response)
                 done();
             });
     });
