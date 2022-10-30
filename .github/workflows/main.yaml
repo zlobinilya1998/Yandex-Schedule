@@ -8,4 +8,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      run: npm run test
+      - name: Running tests
+        run : npm run test
