@@ -1,8 +1,9 @@
-const {config} = require('dotenv')
+import {config} from 'dotenv'
+import axios from 'axios';
+import BotErrors from "../errors/index.js";
+
 config()
 
-const axios = require('axios')
-const BotErrors = require("../errors");
 const Cookie = process.env.COOKIE
 
 class SalonService {
@@ -44,4 +45,5 @@ class SalonService {
     }
 
 }
-module.exports = SalonService;
+
+export default SalonService

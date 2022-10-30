@@ -1,4 +1,4 @@
-const getDefaultResponse = (body) => {
+export const getDefaultResponse = (body) => {
     const { version, session, request } = body
     return {
         version,
@@ -49,7 +49,7 @@ const getClientComment = (event) => {
     const comment = event.client_comment ? `Комментарий от клиента: ${event.client_comment} \n ` : ''
     return comment
 }
-class EventsTransformer {
+export class EventsTransformer {
     static transformIntoView(events){
         return events
             .filter(event => event.id !== 0)
@@ -64,9 +64,4 @@ class EventsTransformer {
 
         return time + clientName + priceText + services;
     }
-}
-
-module.exports = {
-    getDefaultResponse,
-    EventsTransformer,
 }

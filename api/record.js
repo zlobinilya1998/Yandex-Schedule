@@ -1,9 +1,8 @@
-import BotErrors from "../errors";
+import BotErrors from '../errors/index.js'
+import {EventsTransformer,getDefaultResponse} from '../helpers/index.js'
+import SalonService from '../services/Salon.js'
 
-const {getDefaultResponse, EventsTransformer} = require("../helpers");
-const SalonService = require("../services/Salon");
-
-export default async function record(req,res){
+const record = async (req,res) => {
     const response = getDefaultResponse(req.body);
     const tokens = response.request.nlu.tokens;
 
@@ -35,4 +34,6 @@ export default async function record(req,res){
     response.response.end_session = true;
     res.send(response)
 }
+
+export default record
 
