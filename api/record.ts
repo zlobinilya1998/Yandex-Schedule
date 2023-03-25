@@ -1,8 +1,8 @@
-import {BotErrors, Day} from '../models/Entities.js'
-import {EventsTransformer,getDefaultResponse} from '../helpers/index.js'
-import SalonService from '../services/Salon.js'
+import { BotErrors, Day } from "../models/Entities";
+import { EventsTransformer, getDefaultResponse } from "../helpers";
+import SalonService from "../services/Salon";
 
-const record = async (req,res) => {
+const record = async (req, res) => {
     const response = getDefaultResponse(req.body);
     const tokens = response.request.nlu.tokens;
 
@@ -15,10 +15,10 @@ const record = async (req,res) => {
         return res.send(response);
     }
 
-    let data = [];
+    let data: any = [];
 
     try {
-        data = await SalonService.loadEvents(isToday)
+        data = await SalonService.loadEvents(isToday);
     } catch (e) {
         response.response.text = BotErrors.FetchDataError;
         response.response.end_session = true;
@@ -26,14 +26,13 @@ const record = async (req,res) => {
     }
 
     const events = EventsTransformer.transformIntoView(data.events);
-    let eventsText = ''
-    events.forEach(event => eventsText += EventsTransformer.getEventText(event));
+    let eventsText = "";
+    events.forEach((event) => (eventsText += EventsTransformer.getEventText(event)));
 
     if (events.length) response.response.text = eventsText;
     else response.response.text = BotErrors.NoPeriodRecords;
     response.response.end_session = true;
-    res.send(response)
-}
+    res.send(response);
+};
 
-export default record
-
+export default record;

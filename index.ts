@@ -1,6 +1,6 @@
 import express from "express";
-import record from "./api/record.js";
-import specific from "./api/specific.js";
+import record from "./api/record";
+import specific from "./api/specific";
 
 const app = express();
 const port = 3000;
