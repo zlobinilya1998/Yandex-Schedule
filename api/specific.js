@@ -23,6 +23,9 @@ const specific = async (req, res) => {
 
     try {
         data = await SalonService.loadSpecificEvents(day, month);
+
+        console.log(data)
+
         const events = EventsTransformer.transformIntoView(data.events);
 
         let eventsText = ''
