@@ -11,10 +11,10 @@ class SalonService {
     static baseUrl = `https://profsalon.org/CRM/${this.salonPrefix}/desktop`;
 
     static async loadEvents(forceToday = false) {
-        const today = new Date().toLocaleString("ru-Ru").split(",")[0];
+        const today = new Date().toLocaleDateString("ru-Ru");
         let tomorow: string | Date = new Date();
         tomorow.setDate(tomorow.getDate() + 1);
-        tomorow = tomorow.toLocaleString("ru-Ru").split(",")[0];
+        tomorow = tomorow.toLocaleDateString("ru-Ru");
 
         const api_url = this.baseUrl + "/loadScheduleEvents";
         const { data } = await axios.post(

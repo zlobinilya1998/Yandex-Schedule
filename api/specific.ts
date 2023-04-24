@@ -22,7 +22,12 @@ const specific = async (req, res) => {
     try {
         data = await SalonService.loadSpecificEvents(day, month);
 
-        console.log(data);
+        if (data.error && data.error == 403){
+            response.response.text = BotErrors.UnauthorizedException;
+            response.response.end_session = true;
+            return res.send(response);
+        }
+
 
         const events = EventsTransformer.transformIntoView(data.events);
 
