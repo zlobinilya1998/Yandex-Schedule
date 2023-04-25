@@ -18,4 +18,9 @@ export class ApiError extends Error {
         response.response.end_session = true;
         return new ApiError(200, BotErrors.InvalidInputDay, response)
     }
+    static InvalidRequestBody(response) {
+        response.response.text = BotErrors.InvalidRequestBody;
+        response.response.end_session = true;
+        return new ApiError(200, BotErrors.InvalidRequestBody, response)
+    }
 }
