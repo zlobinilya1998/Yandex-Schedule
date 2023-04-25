@@ -10,7 +10,7 @@ const record = async (req, res, next) => {
         const isToday = tokens.includes(Day.Today);
         const isTomorrow = tokens.includes(Day.Tomorrow);
 
-        if (!isToday && !isTomorrow) throw new ApiError.InvalidInputDay(response);
+        if (!(isToday && isTomorrow)) throw new ApiError.InvalidInputDay(response);
         let data = [];
         data = await SalonService.loadEvents(isToday)
         const events = EventsTransformer.transformIntoView(data.events);

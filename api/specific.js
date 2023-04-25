@@ -12,10 +12,10 @@ const specific = async (req, res, next) => {
         const dateTime = entities.find(entity => entity.type === "YANDEX.DATETIME");
         if (!dateTime) throw ApiError.ParseDateException(response)
         const {day, month} = dateTime.value;
+        if (!(day && month)) throw ApiError.ParseDateException(response)
 
         const data = await SalonService.loadSpecificEvents(day, month);
         const events = EventsTransformer.transformIntoView(data.events);
-
         let eventsText = ''
         events.forEach(event => eventsText += EventsTransformer.getEventText(event));
 
