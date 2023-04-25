@@ -5,14 +5,13 @@ import SalonService from '../services/Salon.js'
 import {ApiError} from "../exceptions/index.js";
 
 const specific = async (req, res, next) => {
-    const response = getDefaultResponse(req.body);
-    const entities = response.request.nlu.entities;
-
-    const dateTime = entities.find(entity => entity.type === "YANDEX.DATETIME");
-
-    let data = [];
-
     try {
+        const response = getDefaultResponse(req.body);
+        const entities = response.request.nlu.entities;
+
+        const dateTime = entities.find(entity => entity.type === "YANDEX.DATETIME");
+
+        let data = [];
         if (!dateTime) throw ApiError.ParseDateException(response)
 
         const month = dateTime.value.month;

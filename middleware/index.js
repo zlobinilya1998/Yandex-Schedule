@@ -16,6 +16,8 @@ export const authChecker = async (req, res, next) => {
 }
 
 export const errorHandler = function (err, req, res, next){
+    console.log(err)
+
     if (err instanceof ApiError){
         return res.status(200).send(err.response)
     }
