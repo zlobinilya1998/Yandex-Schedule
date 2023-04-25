@@ -9,6 +9,7 @@ const BotErrors = {
     ParseDateError: 'Мне не удалось распознать дату',
     InvalidInputDay: 'Я могу говорить запись только на сегодня или на завтра',
     UnhandedException: 'Неопознанная ошибка',
+    UnauthorizedException: 'Требуется установить куки для входа в систему профсалон',
 }
 
 export {

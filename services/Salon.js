@@ -1,28 +1,15 @@
-import {config} from 'dotenv'
-import axios from 'axios';
 import {BotErrors} from "../models/Entities.js";
-
-config()
-
-const Cookie = process.env.COOKIE
+import {Api} from "./Api.js";
+import {getFormattedDate} from "../helpers/index.js";
 
 class SalonService {
-    static baseUrl = 'https://profsalon.org/CRM/msc_persona_malaya_nikitskaya/desktop';
-
     static async loadEvents(forceToday = false) {
-        const today = new Date().toLocaleString('ru-Ru').split(',')[0];
-        let tomorow = new Date()
-        tomorow.setDate(tomorow.getDate() + 1);
-        tomorow = tomorow.toLocaleString('ru-Ru').split(',')[0]
+        const today = getFormattedDate(new Date());
+        let tomorrow = new Date()
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow = getFormattedDate(tomorrow);
 
-        const api_url = this.baseUrl + '/loadScheduleEvents';
-        const {data} = await axios.post(api_url, {
-            day: forceToday ? today : tomorow,
-        }, {
-            headers: {
-                Cookie
-            },
-        })
+        const {data} = await Api.post('/loadScheduleEvents', {day: forceToday ? today : tomorrow})
         return data;
     }
 
@@ -33,16 +20,9 @@ class SalonService {
 
         date.setDate(day)
         date.setMonth(month - 1)
-        date = date.toLocaleString('ru-Ru').split(',')[0]
+        date = getFormattedDate(date);
 
-        const api_url = this.baseUrl + '/loadScheduleEvents';
-        const {data} = await axios.post(api_url, {
-            day: date,
-        }, {
-            headers: {
-                Cookie
-            },
-        })
+        const {data} = await Api.post('/loadScheduleEvents', { day: date })
         return data;
     }
 

@@ -9,6 +9,7 @@ export const getDefaultResponse = (body) => {
         }
     }
 }
+export const getFormattedDate = (date) => date.toLocaleDateString('ru-Ru');
 
 const getRandomPhrase = (arr) => {
     const indexOfPhrase = Math.floor(Math.random() * arr.length)
@@ -54,6 +55,7 @@ const getServices = (event) => {
     services += ' \n '
     return services
 }
+
 
 export class EventsTransformer {
     static transformIntoView(events){
