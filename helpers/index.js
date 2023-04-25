@@ -20,7 +20,7 @@ const getTime = (event) => {
     const hours = event.start.getHours();
     const minutes = event.start.getMinutes();
     const timeZone = 3;
-    return `Запись в <b>${hours + timeZone}:${minutes > 0 ? minutes : '00'}</b> \n `
+    return `Запись в ${hours + timeZone}:${minutes > 0 ? minutes : '00'} \n `
 }
 const getClientsCount = (event) => {
     const clients = event.services.length;
