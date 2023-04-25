@@ -13,4 +13,9 @@ export class ApiError extends Error {
         response.session.end_session = true;
         return new ApiError(200, BotErrors.ParseDateError, response)
     }
+    static InvalidInputDay(response) {
+        response.response.text = BotErrors.InvalidInputDay;
+        response.response.end_session = true;
+        return new ApiError(200, BotErrors.InvalidInputDay, response)
+    }
 }

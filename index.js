@@ -9,6 +9,6 @@ app.use(express.json())
 app.use(logger);
 app.use(router);
 app.use(errorHandler);
-app.listen(port, () => console.log('app listening on port ', port))
+app.listen(port, () => console.log('App booted on port:', port))
 
 export default app;
