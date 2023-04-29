@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches:
@@ -8,4 +7,4 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
-      - run: echo Staring test...
+      - run: docker stop zlobinilya/salon-bot
