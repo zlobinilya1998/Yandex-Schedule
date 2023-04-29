@@ -6,6 +6,11 @@ const port = 3000;
 const app = express();
 
 
+app.get('/hi', (req,res) => {
+    res.send({
+        message: 'Hello my friend',
+    })
+})
 app.use(express.json())
 app.use(logger);
 app.use(router);
