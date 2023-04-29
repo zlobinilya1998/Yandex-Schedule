@@ -7,4 +7,4 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
-      - run: docker stop salon-bot
+      - run: cd /usr/src/Yandex-Schedule && git pull
