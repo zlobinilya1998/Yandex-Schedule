@@ -1,5 +1,4 @@
 name: CI
-uses: actions/checkout@v2
 on:
   push:
     branches:
@@ -8,6 +7,7 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v2
       - run: cd /usr/src/Yandex-Schedule && git pull
       - run: docker build -t yandex-schedule .
       - run: docker run --name yandex-schedule --rm -p 3000:3000 yandex-schedule
