@@ -4,6 +4,11 @@ on:
     branches:
       - master
 jobs:
+  Test:
+    runs-on: self-hosted
+    steps: 
+      - uses: actions/checkout@v2
+      - run: npm run test
   Deploy:
     runs-on: self-hosted
     steps:
