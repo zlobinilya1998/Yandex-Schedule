@@ -8,3 +8,5 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: cd /usr/src/Yandex-Schedule && git pull
+      - run: docker build -t yandex-schedule
+      - run: docker run --name yandex-schedule -p 3000:3000
