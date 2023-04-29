@@ -1,9 +1,9 @@
 FROM node:14.18.0
 WORKDIR /usr/src/app
 COPY package*.json ./
-
+ENV COOKIE=PHPSESSID=2sj06r62dfdv71gljk6otdouks
 RUN npm install
-
+VOLUME [ "C:/project/salon-tg-bot:/usr/src/app" ]
 COPY . .
 
 EXPOSE 3000
