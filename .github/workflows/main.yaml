@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  test:
+  Deploy docker:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
