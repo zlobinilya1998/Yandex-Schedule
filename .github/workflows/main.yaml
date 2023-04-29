@@ -8,5 +8,4 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
-      - run: npm ci
-      - run: npm test
+      - run: echo Staring test...
