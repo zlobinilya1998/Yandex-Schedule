@@ -10,4 +10,5 @@ jobs:
       - uses: actions/checkout@v2
       - run: cd /usr/src/Yandex-Schedule && git pull
       - run: docker build -t yandex-schedule .
+      - run: docker stop yandex-schedule
       - run: docker run --name yandex-schedule --rm -d -p 3001:3000 yandex-schedule
