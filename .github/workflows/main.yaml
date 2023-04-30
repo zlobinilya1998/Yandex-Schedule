@@ -7,7 +7,7 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     environment:
-      - COOCKIE: PHPSESSID=2sj06r62dfdv71gljk6otdouks
+      COOCKIE: PHPSESSID=2sj06r62dfdv71gljk6otdouks
     steps: 
       - uses: actions/checkout@v2
       - run: npm i
