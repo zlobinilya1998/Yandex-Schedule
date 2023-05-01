@@ -1,4 +1,4 @@
-import {BotErrors} from "../models/Entities.js";
+import {BotErrors} from "../models/Entities";
 
 export class ApiError extends Error {
     status;

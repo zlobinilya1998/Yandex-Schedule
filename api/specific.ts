@@ -1,9 +1,9 @@
 import {getDefaultResponse} from "../helpers/index.js";
 import {BotErrors} from "../models/Entities.js";
 import {EventsTransformer} from '../helpers/index.js'
-import SalonService from '../services/Salon.js'
+import {SalonService} from '../services'
 
-const specific = async (req, res) => {
+const specific = async (req, res, next) => {
     const response = getDefaultResponse(req.body);
     const entities = response.request.nlu.entities;
 

@@ -1,5 +1,5 @@
-import {Api} from "../services/Api.js";
-import {ApiError} from "../exceptions/index.js";
+import {Api} from "../services/Api";
+import {ApiError} from "../exceptions";
 
 export const logger = async (req, res, next) => {
     console.log(req.method, req.path, new Date().toLocaleTimeString());

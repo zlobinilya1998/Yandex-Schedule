@@ -1,21 +1,13 @@
 import express from 'express'
 import router from "./routes/index.js";
-import {errorHandler, logger} from "./middleware/index.js";
+import {errorHandler, logger} from "./middleware";
 
 const port = 3000;
 const app = express();
 
-
-
 app.use(express.json())
 app.use(logger);
 app.use(router);
-
-
-app.get('/',(req,res,next) => {
-    res.send('Hello from express, redirected from port 80 -> 3001')
-})
-
 app.use(errorHandler);
 app.listen(port, () => console.log('App booted on port:', port))
 

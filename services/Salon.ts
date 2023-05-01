@@ -1,6 +1,6 @@
-import {BotErrors} from "../models/Entities.js";
-import {Api} from "./Api.js";
-import {getFormattedDate} from "../helpers/index.js";
+import {BotErrors} from "../models/Entities";
+import {Api} from "./Api";
+import {getFormattedDate} from "../helpers";
 
 class SalonService {
     static async loadEvents(forceToday = false) {
@@ -13,7 +13,7 @@ class SalonService {
         return data;
     }
 
-    static async loadSpecificEvents(day, month) {
+    static async loadSpecificEvents(day: number, month: number) {
         let date = new Date();
 
         if (!day || !month) return Promise.reject(BotErrors.ParseDateError)

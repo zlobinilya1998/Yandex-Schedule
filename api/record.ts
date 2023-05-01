@@ -1,6 +1,7 @@
-import {BotErrors, Day} from '../models/Entities.js'
-import {EventsTransformer, getDefaultResponse} from '../helpers/index.js'
-import SalonService from '../services/Salon.js'
+import {BotErrors, Day} from '../models/Entities'
+import {EventsTransformer, getDefaultResponse} from '../helpers'
+import {SalonService} from '../services'
+import {ApiError} from '../exceptions';
 
 const record = async (req, res, next) => {
     try {
@@ -10,7 +11,7 @@ const record = async (req, res, next) => {
         const isToday = tokens.includes(Day.Today);
         const isTomorrow = tokens.includes(Day.Tomorrow);
 
-        if (!(isToday && isTomorrow)) throw new ApiError.InvalidInputDay(response);
+        if (!(isToday && isTomorrow)) throw ApiError.InvalidInputDay(response);
         let data = [];
         data = await SalonService.loadEvents(isToday)
         const events = EventsTransformer.transformIntoView(data.events);

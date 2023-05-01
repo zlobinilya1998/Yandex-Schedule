@@ -1,7 +1,7 @@
 import {Router} from "express";
-import specific from "../api/specific.js";
-import record from "../api/record.js";
-import {authChecker} from "../middleware/index.js";
+import specific from "../api/specific";
+import record from "../api/record";
+import {authChecker} from "../middleware";
 import {body} from "express-validator";
 
 const router = Router();
